@@ -76,3 +76,17 @@ def wyswietl_recepte(request):
     return render(request, 'wyswietl_recepte.html', {
         'recepty': recepty
     })
+
+
+def wyswietl_pacjenta(request):
+    pacjenci = Pacjent.objects.all()
+    return render(request, 'wyswietl_pacjenta.html', {
+        'pacjenci': pacjenci
+    })
+
+
+def wyswietl_lekarza(request):
+    lekarze = Lekarz.objects.all()
+    return render(request, 'wyswietl_lekarza.html', {
+        'lekarze': lekarze
+    })
