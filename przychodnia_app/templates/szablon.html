@@ -1,0 +1,77 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block tytul %}Twoja przychodnia{% endblock %}</title>
+    <link href="{% static 'main.css' %}" rel="stylesheet">
+  </head>
+  <body class="bg-justyna-custom">
+  <div class="d-flex justify-content-center w-100">
+    <h1 class="header-logotype w-100 p-2 text-center">
+        <a href="{% url 'index' %}">Twoja przychodnia</a>
+    </h1>
+  </div>
+  <nav class="navbar navbar-expand-lg justyna-nav">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 w-100 mb-lg-0 d-flex justify-content-around">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            LEKARZE
+          </a>
+          <ul class="dropdown-menu fs-5" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'dodaj_lekarza' %}">Dodaj lekarza</a></li>
+            <li><a class="dropdown-item" href="{% url 'wyswietl_lekarza' %}">Wyświetl lekarzy</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PACJENCI
+          </a>
+          <ul class="dropdown-menu fs-5" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'dodaj_pacjenta' %}">Dodaj pacjenta</a></li>
+            <li><a class="dropdown-item" href="{% url 'wyswietl_pacjenta' %}">Wyświetl pacjentów</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            RECEPTY
+          </a>
+          <ul class="dropdown-menu fs-5" aria-labelledby="navbarDropdown" >
+            <li><a class="dropdown-item" href="{% url 'dodaj_recepte' %}">Dodaj receptę</a></li>
+            <li><a class="dropdown-item" href="{% url 'wyswietl_recepte' %}">Wyświetl recepty</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            LEKI
+          </a>
+          <ul class="dropdown-menu fs-5" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'dodaj_lek' %}">Dodaj lek</a></li>
+            <li><a class="dropdown-item" href="{% url 'wyswietl_lek' %}">Wyświetl leki</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+{% block zawartosc %}
+{% endblock %}
+  <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>
