@@ -1,0 +1,33 @@
+{% extends "szablon.html" %}
+
+{% block tytul %}Twoja przychodnia-Wyświetl Lekarzy{% endblock %}
+
+{% block zawartosc %}
+<meta charset="UTF-8">
+
+<div class="container">
+    <h1 class="header-logotype2 text-center p-3">Lista lekarzy</h1>
+
+        <table class="table table-bordered justyna-table text-center">
+            <tr>
+                <th>LP</th>
+                <th>ID</th>
+                <th>IMIE I NAZWISKO</th>
+                <th>SPECJALIZACJA</th>
+                <th>NUMER TELEFONU</th>
+                <th>EMAIL</th>
+            </tr>
+
+            {% for lekarz in lekarze %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ lekarz.id }}</td>
+                    <td>{{ lekarz.imie_nazwisko }}</td>
+                    <td>{{ lekarz.specjalizacja }}</td>
+                    <td>{{ lekarz.numer_telefonu }}</td>
+                    <td>{{ lekarz.email}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}
