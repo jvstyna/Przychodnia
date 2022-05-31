@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@300&display=swap');
+@import url('bootstrap.css');
+
+:root {
+  --bg-justynka-zielonki: rgba(14, 153, 161, 0.2)
+}
+
+html {
+  height: 100%;
+}
+
+.bg-justyna-custom {
+  background: url("img/bg.jpg") center center/cover no-repeat;
+}
+
+.header-logotype {
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  font-size: 6rem;
+  background: var(--bg-justynka-zielonki);
+  margin-bottom: -0.5px;
+  /*color: black;*/
+  /*text-decoration: none;*/
+}
+
+.header-logotype2 {
+  font-family: 'Amatic SC', cursive;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  /*color: black;*/
+  /*text-decoration: none;*/
+}
+
+.header-logotype a {
+  color: black;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.header-logotype a:hover {
+  text-decoration: none;
+}
+
+.justyna-nav {
+  font-family: 'Amatic SC', cursive;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  background: var(--bg-justynka-zielonki);
+}
+
+.justyna-table {
+  background: rgba(255,255,255,0.9);
+}
+.justyna-form {
+  background: rgba(255,255,255,0.9);
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+  border-radius: 16px;
+}
+.justyna-button-colour{
+  background: rgba(14, 153, 161, 0.5)
+}
