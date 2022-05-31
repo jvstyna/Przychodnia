@@ -53,5 +53,5 @@ class DodajRecepte(forms.ModelForm):
             'lekarz': forms.Select(attrs={'class': 'form-control'}),
             'lek': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'data': forms.SplitDateTimeWidget(attrs={'class': 'form-control'}),
-            'zalecenia': forms.Textarea(attrs={'class': 'form-control'})
+            'zalecenie': forms.Textarea(attrs={'class': 'form-control'})
         }
