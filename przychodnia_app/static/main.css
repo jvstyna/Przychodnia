@@ -11,7 +11,7 @@ html {
 }
 
 .bg-justyna-custom {
-  background: url("img/bg.jpg") center center/cover no-repeat;
+  background: url("img/bg.jpg") center center/cover no-repeat fixed;
 }
 
 .header-logotype {
