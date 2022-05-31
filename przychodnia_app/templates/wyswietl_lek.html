@@ -1,23 +1,31 @@
+{% extends "szablon.html" %}
+
+{% block tytul %}Twoja przychodnia-Wyświetl Recepty{% endblock %}
+
+{% block zawartosc %}
 <meta charset="UTF-8">
 
-<h1>Lista leków</h1>
+<div class="container">
+    <h1 class="header-logotype2 text-center p-3">Lista leków</h1>
 
-<table class="table">
-    <tr>
-        <th>LP</th>
-        <th>ID</th>
-        <th>NAZWA</th>
-        <th>SUBSTANCJA CZYNNA</th>
-        <th>CENA</th>
-    </tr>
+        <table class="table table-bordered justyna-table text-center">
+            <tr>
+                <th>LP</th>
+                <th>ID</th>
+                <th>NAZWA</th>
+                <th>SUBSTANCJA CZYNNA</th>
+                <th>CENA</th>
+            </tr>
 
-    {% for lek in leki %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ lek.id }}</td>
-            <td>{{ lek.nazwa }}</td>
-            <td>{{ lek.substancja_czynna }}</td>
-            <td>{{ lek.cena }}</td>
-        </tr>
-    {% endfor %}
-</table>
+            {% for lek in leki %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ lek.id }}</td>
+                    <td>{{ lek.nazwa }}</td>
+                    <td>{{ lek.substancja_czynna }}</td>
+                    <td>{{ lek.cena }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}

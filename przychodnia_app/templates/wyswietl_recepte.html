@@ -1,33 +1,42 @@
+{% extends "szablon.html" %}
+{% load static %}
+
+
+{% block tytul %}Twoja przychodnia-Wyświetl Recepty{% endblock %}
+<link href="{% static 'main.css' %}" rel="stylesheet">
+{% block zawartosc %}
 <meta charset="UTF-8">
 
-<h1>Lista recept</h1>
+<div class="container">
+    <h1 class="header-logotype2 text-center p-3">Lista recept</h1>
 
-<table class="table">
-    <tr>
-        <th>LP</th>
-        <th>ID</th>
-        <th>LEK</th>
-        <th>ILOSC</th>
-        <th>DATA</th>
-        <th>PACJENT</th>
-        <th>LEKARZ</th>
-        <th>ZALECENIE</th>
-    </tr>
-
-    {% for recepta in recepty %}
+    <table class="table table-bordered justyna-table text-center">
         <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ recepta.id }}</td>
-            <td>
-                {% for lek in recepta.lek.all %}
-                    {{ lek.nazwa }}<br>
-                {% endfor %}
-            </td>
-            <td>{{ recepta.ilosc }}</td>
-            <td>{{ recepta.data }}</td>
-            <td>{{ recepta.pacjent.imie_nazwisko}}</td>
-            <td>{{ recepta.lekarz.imie_nazwisko }}</td>
-            <td>{{ recepta.zalecenie }}</td>
+            <th>LP</th>
+            <th>ID</th>
+            <th>LEK</th>
+            <th>DATA</th>
+            <th>PACJENT</th>
+            <th>LEKARZ</th>
+            <th>ZALECENIE</th>
         </tr>
-    {% endfor %}
-</table>
+
+        {% for recepta in recepty %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ recepta.id }}</td>
+                <td>
+                    {% for lek in recepta.lek.all %}
+                        {{ lek.nazwa }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ recepta.data }}</td>
+                <td>{{ recepta.pacjent.imie_nazwisko}}</td>
+                <td>{{ recepta.lekarz.imie_nazwisko }}</td>
+                <td>{{ recepta.zalecenie }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

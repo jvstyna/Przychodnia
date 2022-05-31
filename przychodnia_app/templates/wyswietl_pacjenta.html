@@ -1,29 +1,36 @@
+{% extends "szablon.html" %}
+
+{% block tytul %}Twoja przychodnia-Wyświetl Pacjentów{% endblock %}
+
+{% block zawartosc %}
 <meta charset="UTF-8">
+<div class="container">
+    <h1 class="header-logotype2 text-center p-3">Lista pacjentów</h1>
 
-<h1>Lista pacjentów</h1>
+        <table class="table table-bordered justyna-table text-center">
+            <tr>
+                <th>LP</th>
+                <th>ID</th>
+                <th>IMIE I NAZWISKO</th>
+                <th>PŁEĆ</th>
+                <th>DATA URODZENIA</th>
+                <th>PESEL</th>
+                <th>NUMER TELEFONU</th>
+                <th>EMAIL</th>
+            </tr>
 
-<table class="table">
-    <tr>
-        <th>LP</th>
-        <th>ID</th>
-        <th>IMIE I NAZWISKO</th>
-        <th>PŁEĆ</th>
-        <th>DATA URODZENIA</th>
-        <th>PESEL</th>
-        <th>NUMER TELEFONU</th>
-        <th>EMAIL</th>
-    </tr>
-
-    {% for pacjent in pacjenci %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ pacjent.id }}</td>
-            <td>{{ pacjent.imie_nazwisko }}</td>
-            <td>{{ pacjent.plec }}</td>
-            <td>{{ pacjent.data_urodzenia }}</td>
-            <td>{{ pacjent.pesel }}</td>
-            <td>{{ pacjent.numer_telefonu }}</td>
-            <td>{{ pacjent.email}}</td>
-        </tr>
-    {% endfor %}
-</table>
+            {% for pacjent in pacjenci %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ pacjent.id }}</td>
+                    <td>{{ pacjent.imie_nazwisko }}</td>
+                    <td>{{ pacjent.plec }}</td>
+                    <td>{{ pacjent.data_urodzenia }}</td>
+                    <td>{{ pacjent.pesel }}</td>
+                    <td>{{ pacjent.numer_telefonu }}</td>
+                    <td>{{ pacjent.email}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}
