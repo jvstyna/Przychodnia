@@ -1,8 +1,12 @@
-<form method="post" novalidate>
-    {% csrf_token %}
-    <ul>
-        {{ form.as_ul }}
-    </ul>
-    <input type="submit" value="Wyślij">
-    <input type="reset" value="Resetuj">
-</form>
+<div class="container">
+    <form class="justyna-form" method="post" novalidate>
+        {% csrf_token %}
+        <ul>
+            {{ form.as_p }}
+        </ul>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn justyna-button-colour">Wyślij</button>
+            <button type="reset" class="btn btn-secondary">Resetuj</button>
+        </div>
+    </form>
+</div>
