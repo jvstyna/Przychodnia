@@ -37,6 +37,9 @@
             </tr>
         {% endfor %}
     </table>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="{% url 'export_recepty' %}"  class="btn justyna-button-color-second">Eksportuj do CSV</a>
+        </div>
 </div>
 
 {% endblock %}
