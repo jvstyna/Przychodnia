@@ -11,4 +11,8 @@ urlpatterns = [
     path('wyswietl_recepte/', views.wyswietl_recepte, name='wyswietl_recepte'),
     path('wyswietl_pacjenta/', views.wyswietl_pacjenta, name='wyswietl_pacjenta'),
     path('wyswietl_lekarza/', views.wyswietl_lekarza, name='wyswietl_lekarza'),
+    path('export_leki/', views.export_leki, name='export_leki'),
+    path('export_lekarze/', views.export_lekarze, name='export_lekarze'),
+    path('export_pacjenci/', views.export_pacjenci, name='export_pacjenci'),
+    path('export_recepty/', views.export_recepty, name='export_recepty')
 ]
