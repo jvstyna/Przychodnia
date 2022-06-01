@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import DodajLek, DodajLekarza, DodajRecepte, DodajPacjenta
 from .models import Pacjent, Lekarz, Lek, Recepta
 import csv
@@ -64,6 +64,30 @@ def dodaj_pacjenta(request):
     return render(request, 'dodaj_pacjenta.html', {
         'form': form
     })
+
+
+def usun_lek(request, id):
+    lek = Lek.objects.get(id=id)
+    lek.delete()
+    return HttpResponseRedirect(reverse('wyswietl_lek'))
+
+
+def usun_lekarza(request, id):
+    lekarz = Lekarz.objects.get(id=id)
+    lekarz.delete()
+    return HttpResponseRedirect(reverse('wyswietl_lekarza'))
+
+
+def usun_recepte(request, id):
+    recepta = Recepta.objects.get(id=id)
+    recepta.delete()
+    return HttpResponseRedirect(reverse('wyswietl_recepte'))
+
+
+def usun_pacjenta(request, id):
+    pacjent = Pacjent.objects.get(id=id)
+    pacjent.delete()
+    return HttpResponseRedirect(reverse('wyswietl_pacjenta'))
 
 
 def wyswietl_lek(request):
@@ -144,3 +168,5 @@ def export_recepty(request):
     response['Content-Disposition'] = f'attachment; filename="recepty_{datetime.date.today()}.csv"'
 
     return response
+
+
