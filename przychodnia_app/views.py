@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .forms import DodajLek, DodajLekarza, DodajRecepte, DodajPacjenta
 from .models import Pacjent, Lekarz, Lek, Recepta
 import csv
@@ -170,3 +170,28 @@ def export_recepty(request):
     return response
 
 
+def wykres_lekarze(request):
+    return render(request, 'wykres_lekarze.html')
+
+
+def api_wykres_lekarze(request):
+    labels = ['Internista', 'Pediatra','Ginekolog','Chirurg', 'Ortopeda', 'Laryngolog',
+              'Okulista', 'Kardiolog','Urolog', 'Urolog', 'Psychiatra']
+    data = {}
+    for label in labels:
+        data[label] = Lekarz.objects.filter(specjalizacja=label).count()
+
+    return JsonResponse(data)
+
+
+def wykres_pacjenci(request):
+    return render(request, 'wykres_pacjenci.html')
+
+
+def api_wykres_pacjenci(request):
+    labels = ['K', 'M']
+    data = {}
+    for label in labels:
+        data[label] = Pacjent.objects.filter(plec=label).count()
+
+    return JsonResponse(data)
