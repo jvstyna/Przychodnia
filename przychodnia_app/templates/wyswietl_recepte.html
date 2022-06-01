@@ -19,6 +19,7 @@
             <th>PACJENT</th>
             <th>LEKARZ</th>
             <th>ZALECENIE</th>
+            <th>USUŃ</th>
         </tr>
 
         {% for recepta in recepty %}
@@ -34,6 +35,7 @@
                 <td>{{ recepta.pacjent.imie_nazwisko}}</td>
                 <td>{{ recepta.lekarz.imie_nazwisko }}</td>
                 <td>{{ recepta.zalecenie }}</td>
+                    <td><a href="usun/{{ recepta.id }}">Usuń</a></td>
             </tr>
         {% endfor %}
     </table>

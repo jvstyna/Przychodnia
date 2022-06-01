@@ -17,6 +17,7 @@
                 <th>PESEL</th>
                 <th>NUMER TELEFONU</th>
                 <th>EMAIL</th>
+                <th>USUŃ</th>
             </tr>
 
             {% for pacjent in pacjenci %}
@@ -29,6 +30,7 @@
                     <td>{{ pacjent.pesel }}</td>
                     <td>{{ pacjent.numer_telefonu }}</td>
                     <td>{{ pacjent.email}}</td>
+                    <td><a href="usun/{{ pacjent.id }}">Usuń</a></td>
                 </tr>
             {% endfor %}
         </table>

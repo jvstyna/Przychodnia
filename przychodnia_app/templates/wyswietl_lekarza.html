@@ -16,6 +16,7 @@
                 <th>SPECJALIZACJA</th>
                 <th>NUMER TELEFONU</th>
                 <th>EMAIL</th>
+                <th>USUŃ</th>
             </tr>
 
             {% for lekarz in lekarze %}
@@ -25,7 +26,8 @@
                     <td>{{ lekarz.imie_nazwisko }}</td>
                     <td>{{ lekarz.specjalizacja }}</td>
                     <td>{{ lekarz.numer_telefonu }}</td>
-                    <td>{{ lekarz.email}}</td>
+                    <td>{{ lekarz.email }}</td>
+                    <td><a href="usun/{{ lekarz.id }}">Usuń</a></td>
                 </tr>
             {% endfor %}
         </table>

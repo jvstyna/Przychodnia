@@ -15,6 +15,7 @@
                 <th>NAZWA</th>
                 <th>SUBSTANCJA CZYNNA</th>
                 <th>CENA</th>
+                <th>USUŃ</th>
             </tr>
 
             {% for lek in leki %}
@@ -24,6 +25,7 @@
                     <td>{{ lek.nazwa }}</td>
                     <td>{{ lek.substancja_czynna }}</td>
                     <td>{{ lek.cena }}</td>
+                    <td><a href="usun/{{ lek.id }}">Usuń</a></td>
                 </tr>
             {% endfor %}
         </table>
