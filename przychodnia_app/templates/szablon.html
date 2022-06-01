@@ -29,7 +29,7 @@
             <li><a class="dropdown-item" href="{% url 'dodaj_lekarza' %}">Dodaj lekarza</a></li>
             <li><a class="dropdown-item" href="{% url 'wyswietl_lekarza' %}">Wyświetl lekarzy</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="{% url 'wykres_lekarze' %}">Pokaż wykres</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -40,7 +40,7 @@
             <li><a class="dropdown-item" href="{% url 'dodaj_pacjenta' %}">Dodaj pacjenta</a></li>
             <li><a class="dropdown-item" href="{% url 'wyswietl_pacjenta' %}">Wyświetl pacjentów</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="{% url 'wykres_pacjenci' %}">Pokaż wykres</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -50,8 +50,6 @@
           <ul class="dropdown-menu fs-5" aria-labelledby="navbarDropdown" >
             <li><a class="dropdown-item" href="{% url 'dodaj_recepte' %}">Dodaj receptę</a></li>
             <li><a class="dropdown-item" href="{% url 'wyswietl_recepte' %}">Wyświetl recepty</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -61,8 +59,6 @@
           <ul class="dropdown-menu fs-5" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{% url 'dodaj_lek' %}">Dodaj lek</a></li>
             <li><a class="dropdown-item" href="{% url 'wyswietl_lek' %}">Wyświetl leki</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
 
