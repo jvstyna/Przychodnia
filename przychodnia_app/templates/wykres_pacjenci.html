@@ -1,0 +1,66 @@
+{% extends "szablon.html" %}
+{% load static %}
+
+
+{% block tytul %}Twoja przychodnia-Wykres pacjentów{% endblock %}
+<link href="{% static 'main.css' %}" rel="stylesheet">
+
+
+{% block zawartosc %}
+    <h1 class="header-logotype2 text-center p-3 mt-3">Płcie</h1>
+    <div class="container mt-3 justyna-chart">
+
+        <canvas id="myChart" class="w-75 px-0 mx-auto"></canvas>
+        <script src="{% static 'jquery.min.js' %}"></script>
+        <script src="{% static 'chart.min.js' %}"></script>
+        <script>
+        const endpoint = '/api/wykres_pacjenci/'
+        let labels = [];
+        let counts = [];
+
+        $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function(data) {
+                labels = ['Kobieta', 'Mężczyzna'];
+                counts = Object.values(data);
+
+                MyChart(labels, counts);
+            },
+            error: function(error_data){
+                console.log("error")
+                console.log(error_data)
+            }
+        });
+
+        function MyChart(label, counts) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Ilość pacjentów na płeć',
+                        data: counts,
+                        backgroundColor: [
+                            'rgba(14, 153, 161, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(14, 153, 161, 1)'
+                        ],
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                }
+            });
+        }
+
+        </script>
+    </div>
+{% endblock %}
