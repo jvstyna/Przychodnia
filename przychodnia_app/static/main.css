@@ -64,6 +64,9 @@ html {
   padding-left: 10px;
   border-radius: 16px;
 }
-.justyna-button-colour{
-  background: rgba(14, 153, 161, 0.5)
+.justyna-button-color {
+  background: rgba(14, 153, 161, 0.5);
+}
+.justyna-button-color-second {
+  background: rgba(14, 153, 161, 0.9);
 }
