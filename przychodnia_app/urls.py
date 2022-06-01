@@ -18,5 +18,9 @@ urlpatterns = [
     path('export_leki/', views.export_leki, name='export_leki'),
     path('export_lekarze/', views.export_lekarze, name='export_lekarze'),
     path('export_pacjenci/', views.export_pacjenci, name='export_pacjenci'),
-    path('export_recepty/', views.export_recepty, name='export_recepty')
+    path('export_recepty/', views.export_recepty, name='export_recepty'),
+    path('wykres_lekarze/', views.wykres_lekarze, name='wykres_lekarze'),
+    path('api/wykres_lekarze/', views.api_wykres_lekarze, name='api_wykres_lekarze'),
+    path('wykres_pacjenci/', views.wykres_pacjenci, name='wykres_pacjenci'),
+    path('api/wykres_pacjenci/', views.api_wykres_pacjenci, name='api_wykres_pacjenci'),
 ]
