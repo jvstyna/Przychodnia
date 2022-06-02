@@ -279,7 +279,7 @@ def zalacz_plik_leki(request):
             substancja_czynna=column[1],
             cena=column[2]
         )
-    return render(request, template)
+    return wyswietl_lek(request)
 
 
 def filtruj_lek(request):
