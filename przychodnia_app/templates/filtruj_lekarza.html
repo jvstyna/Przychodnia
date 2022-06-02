@@ -1,0 +1,26 @@
+{% extends "szablon.html" %}
+
+{% block tytul %} Twoja przychodnia-Filtruj{% endblock %}
+
+{% block zawartosc %}
+    <meta charset="UTF-8">
+    <h1 class="header-logotype2 text-center p-4">Filtruj</h1>
+    <div class="container">
+        <form method="GET" class="justyna-form" action=".">
+            <div class="w-75 mb-3 p-3 d-flex flex-column mx-auto">
+                <label for="filterBy">Filtruj po:</label>
+                <select class="form-select" name="filterBy">
+                  <option value="imie_nazwisko">Imię i nazwisko</option>
+                  <option value="specjalizacja">Specjalizacja</option>
+                </select>
+            </div>
+            <div class="w-75 mb-5  mx-auto">
+                <label for="phrase" class="justyna-font">Wyszukaj:</label>
+                <input class="form-control form-control-lg " type="text" name="phrase">
+            </div>
+            <div class="d-grid gap-2 col-6 p-3 mx-auto">
+                <button type="submit" class="btn justyna-button-color-second">Filtruj</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
