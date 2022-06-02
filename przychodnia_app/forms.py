@@ -1,5 +1,5 @@
 from django import forms
-from .models import Lekarz, Pacjent, Lek, Recepta
+from .models import Lekarz, Pacjent, Lek, Recepta, IloscLeku
 
 
 class DodajLekarza(forms.ModelForm):
@@ -46,12 +46,22 @@ class DodajRecepte(forms.ModelForm):
     class Meta:
         model = Recepta
         fields = '__all__'
-        fields = ('pacjent', 'lekarz', 'lek', 'data', 'zalecenie')
+        fields = ('pacjent', 'lekarz', 'data')
 
         widgets = {
             'pacjent': forms.Select(attrs={'class': 'form-control'}),
             'lekarz': forms.Select(attrs={'class': 'form-control'}),
-            'lek': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'data': forms.DateTimeInput(attrs={'class': 'form-control'}),
-            'zalecenie': forms.Textarea(attrs={'class': 'form-control'})
+        }
+
+
+class IloscLeku(forms.ModelForm):
+    class Meta:
+        model = IloscLeku
+        exclude = ('recepta',)
+
+        widgets = {
+            'lek': forms.Select(attrs={'class': 'form-control'}),
+            'ilosc': forms.NumberInput(attrs={'class': 'form-control'}),
+            'dawkowanie': forms.TextInput(attrs={'class': 'form-control'}),
         }
