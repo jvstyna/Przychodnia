@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/wykres_lekarze/', views.api_wykres_lekarze, name='api_wykres_lekarze'),
     path('wykres_pacjenci/', views.wykres_pacjenci, name='wykres_pacjenci'),
     path('api/wykres_pacjenci/', views.api_wykres_pacjenci, name='api_wykres_pacjenci'),
+    path('wyswietl_lek/wgraj', views.zalacz_plik_leki, name='zalacz_plik')
 ]
