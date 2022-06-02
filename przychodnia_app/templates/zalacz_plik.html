@@ -1,0 +1,27 @@
+{% extends "szablon.html" %}
+
+{% block tytul %} Twoja przychodnia-Wgraj plik{% endblock %}
+
+{% block zawartosc %}
+    <meta charset="UTF-8">
+    <h1 class="header-logotype2 text-center p-4">Wgraj plik</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div>
+            <strong>{{ message|safe }}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="container">
+            <form method="post" class="justyna-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="w-75 mb-3 p-5 d-flex flex-column mx-auto">
+                    <input type="file" name="file" class="form-control">
+                </div>
+                <div class="d-grid gap-2 col-6 p-3 mx-auto">
+                    <button type="submit" class="btn justyna-button-color">Wgraj</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
