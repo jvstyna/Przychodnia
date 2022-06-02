@@ -1,6 +1,9 @@
+import io
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from .forms import DodajLek, DodajLekarza, DodajRecepte, DodajPacjenta
+from django.contrib import messages
+from django.core.paginator import Paginator
+from .forms import DodajLek, DodajLekarza, DodajRecepte, DodajPacjenta, IloscLeku
 from .models import Pacjent, Lekarz, Lek, Recepta
 import csv
 import datetime
@@ -17,7 +20,7 @@ def dodaj_lek(request):
         form = DodajLek(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index') #dodaj htmla tutaj z widokiem wyboru kolejnej aktywnosci
+            return redirect('wyswietl_lek')
 
     return render(request, 'dodaj_lek.html', {
         'form': form
@@ -31,7 +34,7 @@ def dodaj_lekarza(request):
         form = DodajLekarza(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index') #dodaj htmla tutaj z widokiem wyboru kolejnej aktywnosci
+            return redirect('wyswietl_lekarza')
 
     return render(request, 'dodaj_lekarza.html', {
         'form': form
@@ -41,14 +44,26 @@ def dodaj_lekarza(request):
 def dodaj_recepte(request):
     if request.method == 'GET':
         form = DodajRecepte()
+        ilosci = []
+        for i in range(10):
+            ilosci.append(IloscLeku(prefix=f'lek{i}'))
     if request.method == 'POST':
         form = DodajRecepte(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index') #dodaj htmla tutaj z widokiem wyboru kolejnej aktywnosci
+        ilosci = []
+        for i in range(10):
+            if request.POST[f'lek{i}-lek']:
+                ilosci.append(IloscLeku(request.POST, prefix=f'lek{i}'))
+        if form.is_valid() and all(f.is_valid() for f in ilosci):
+            recepta=form.save()
+            for ilosc in ilosci:
+                zmienna = ilosc.save(commit=False)
+                zmienna.recepta = recepta
+                zmienna.save()
+            return redirect('wyswietl_recepte')
 
     return render(request, 'dodaj_recepte.html', {
-        'form': form
+        'form': form,
+        'ilosci': ilosci
     })
 
 
@@ -59,7 +74,7 @@ def dodaj_pacjenta(request):
         form = DodajPacjenta(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index') #dodaj htmla tutaj z widokiem wyboru kolejnej aktywnosci
+            return redirect('wyswietl_pacjenta')
 
     return render(request, 'dodaj_pacjenta.html', {
         'form': form
@@ -91,31 +106,107 @@ def usun_pacjenta(request, id):
 
 
 def wyswietl_lek(request):
-    leki = Lek.objects.all()
+    filter_by = request.GET.get('filterBy') or ''
+    phrase = request.GET.get('phrase') or ''
+
+    if filter_by and phrase:
+        query_args = {
+            '{0}__{1}'.format(filter_by, 'exact' if phrase.isnumeric() else 'icontains'): phrase
+        }
+
+        leki = Lek.objects.filter(**query_args)
+    else:
+        leki = Lek.objects.all()
+
+    p = Paginator(leki, 5)
+    page = request.GET.get('page')
+    leki_na_stronie = p.get_page(page)
+
     return render(request, 'wyswietl_lek.html', {
-        'leki': leki
+        'leki': leki,
+        'leki_na_stronie': leki_na_stronie,
+        'filter_by': filter_by,
+        'phrase': phrase,
     })
 
 
 def wyswietl_recepte(request):
+    filter_by = request.GET.get('filterBy') or ''
+    phrase = request.GET.get('phrase') or ''
+
+    if filter_by and phrase:
+        query_args = {
+            '{0}__{1}'.format(filter_by, 'exact' if phrase.isnumeric() else 'icontains'): phrase
+        }
+
+        recepta = Recepta.objects.filter(**query_args)
+    else:
+        recepta = Recepta.objects.all()
+
+    p = Paginator(recepta, 5)
+    page = request.GET.get('page')
+    recepty_na_stronie = p.get_page(page)
     recepty = Recepta.objects.all()
+
     return render(request, 'wyswietl_recepte.html', {
-        'recepty': recepty
+        'recepty': recepty,
+        'recepty_na_stronie': recepty_na_stronie,
+        'filter_by': filter_by,
+        'phrase': phrase
     })
 
 
 def wyswietl_pacjenta(request):
+    filter_by = request.GET.get('filterBy') or ''
+    phrase = request.GET.get('phrase') or ''
+
+    if filter_by and phrase:
+        query_args = {
+            '{0}__{1}'.format(filter_by, 'exact' if phrase.isnumeric() else 'icontains'): phrase
+        }
+
+        pacjent = Pacjent.objects.filter(**query_args)
+    else:
+        pacjent = Pacjent.objects.all()
+
+    p = Paginator(pacjent, 5)
+    page = request.GET.get('page')
+    pacjenci_na_stronie = p.get_page(page)
     pacjenci = Pacjent.objects.all()
+
     return render(request, 'wyswietl_pacjenta.html', {
-        'pacjenci': pacjenci
+        'pacjenci': pacjenci,
+        'pacjenci_na_stronie': pacjenci_na_stronie,
+        'filter_by': filter_by,
+        'phrase': phrase
     })
 
 
 def wyswietl_lekarza(request):
+    filter_by = request.GET.get('filterBy') or ''
+    phrase = request.GET.get('phrase') or ''
+
+    if filter_by and phrase:
+        query_args = {
+            '{0}__{1}'.format(filter_by, 'exact' if phrase.isnumeric() else 'icontains'): phrase
+        }
+
+        lekarz = Lekarz.objects.filter(**query_args)
+    else:
+        lekarz = Lekarz.objects.all()
+
+    p = Paginator(lekarz, 5)
+    page = request.GET.get('page')
+    lekarze_na_stronie = p.get_page(page)
     lekarze = Lekarz.objects.all()
+
     return render(request, 'wyswietl_lekarza.html', {
-        'lekarze': lekarze
+        'lekarze': lekarze,
+        'lekarze_na_stronie': lekarze_na_stronie,
+        'filter_by': filter_by,
+        'phrase': phrase
     })
+
 
 
 def export_leki(request):
@@ -195,3 +286,26 @@ def api_wykres_pacjenci(request):
         data[label] = Pacjent.objects.filter(plec=label).count()
 
     return JsonResponse(data)
+
+
+def zalacz_plik_leki(request):
+    template = 'zalacz_plik.html'
+    if request.method == "GET":
+        return render(request, template)
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=','):
+
+        _, created = Lek.objects.update_or_create(
+            nazwa=column[0],
+            substancja_czynna=column[1],
+            cena=column[2]
+        )
+        print(created)
+    return render(request, template)
