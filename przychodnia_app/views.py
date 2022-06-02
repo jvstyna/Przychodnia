@@ -279,7 +279,7 @@ def zalacz_plik_leki(request):
             substancja_czynna=column[1],
             cena=column[2]
         )
-    return wyswietl_lek(request)
+    return HttpResponseRedirect(reverse('wyswietl_lek'))
 
 
 def filtruj_lek(request):
