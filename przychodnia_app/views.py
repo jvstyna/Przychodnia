@@ -131,28 +131,14 @@ def wyswietl_lek(request):
 
 
 def wyswietl_recepte(request):
-    filter_by = request.GET.get('filterBy') or ''
-    phrase = request.GET.get('phrase') or ''
-
-    if filter_by and phrase:
-        query_args = {
-            '{0}__{1}'.format(filter_by, 'exact' if phrase.isnumeric() else 'icontains'): phrase
-        }
-
-        recepta = Recepta.objects.filter(**query_args)
-    else:
-        recepta = Recepta.objects.all()
-
-    p = Paginator(recepta, 5)
+    recepty = Recepta.objects.all()
+    p = Paginator(recepty, 5)
     page = request.GET.get('page')
     recepty_na_stronie = p.get_page(page)
-    recepty = Recepta.objects.all()
 
     return render(request, 'wyswietl_recepte.html', {
         'recepty': recepty,
         'recepty_na_stronie': recepty_na_stronie,
-        'filter_by': filter_by,
-        'phrase': phrase
     })
 
 
@@ -248,19 +234,6 @@ def export_pacjenci(request):
     return response
 
 
-def export_recepty(request):
-    response = HttpResponse(content_type='text/csv')
-    writer = csv.writer(response)
-    writer.writerow(['Lek', 'Data', 'Pacjent', 'Lekarz', 'Zalecenie'])
-
-    for recepta in Recepta.objects.all().values_list('lek', 'data', 'pacjent', 'lekarz', 'zalecenie'):
-        writer.writerow(recepta)
-
-    response['Content-Disposition'] = f'attachment; filename="recepty_{datetime.date.today()}.csv"'
-
-    return response
-
-
 def wykres_lekarze(request):
     return render(request, 'wykres_lekarze.html')
 
@@ -301,11 +274,26 @@ def zalacz_plik_leki(request):
     io_string = io.StringIO(data_set)
     next(io_string)
     for column in csv.reader(io_string, delimiter=','):
-
         _, created = Lek.objects.update_or_create(
             nazwa=column[0],
             substancja_czynna=column[1],
             cena=column[2]
         )
-        print(created)
     return render(request, template)
+
+
+def filtruj_lek(request):
+    return render(request, 'filtruj_lek.html')
+
+
+def filtruj_lekarza(request):
+    return render(request, 'filtruj_lekarza.html')
+
+
+def filtruj_pacjenta(request):
+    return render(request, 'filtruj_pacjenta.html')
+
+
+
+
+
