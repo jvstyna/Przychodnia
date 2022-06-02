@@ -36,7 +36,7 @@ class Lekarz(DaneOsobowe):
 class Pacjent(DaneOsobowe):
     plec = models.CharField(max_length=1, choices=PLEC)
     data_urodzenia = models.DateField()
-    pesel = models.IntegerField()
+    pesel = models.CharField(max_length=11)
 
     def __str__(self):
         return self.imie_nazwisko
@@ -50,9 +50,16 @@ class Lek(models.Model):
     def __str__(self):
         return self.nazwa
 
+
 class Recepta(models.Model):
     pacjent = models.ForeignKey(Pacjent, on_delete=models.CASCADE)
     lekarz = models.ForeignKey(Lekarz, on_delete=models.CASCADE)
-    lek = models.ManyToManyField(Lek)
     data = models.DateTimeField(default=timezone.now)
-    zalecenie = models.TextField()
+
+
+class IloscLeku(models.Model):
+    recepta = models.ForeignKey(Recepta, on_delete=models.CASCADE)
+    lek = models.ForeignKey(Lek, on_delete=models.CASCADE)
+    ilosc = models.IntegerField()
+    dawkowanie = models.CharField(max_length=10)
+
