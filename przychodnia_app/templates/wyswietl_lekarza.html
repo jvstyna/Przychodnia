@@ -19,7 +19,7 @@
                 <th>USUŃ</th>
             </tr>
 
-            {% for lekarz in lekarze %}
+            {% for lekarz in lekarze_na_stronie %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ lekarz.id }}</td>
@@ -31,6 +31,26 @@
                 </tr>
             {% endfor %}
         </table>
+
+       <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+
+            {% if lekarze_na_stronie.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1{% if filter_by and phrase %}&filterBy={{ filter_by }}&phrase={{ phrase }}{% endif %}">&laquo Pierwsza</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ lekarze_na_stronie.previous_page_number }}{% if filter_by and phrase %}&filterBy={{ filter_by }}&phrase={{ phrase }}{% endif %}">Poprzednia</a></li>
+            {% endif %}
+
+                <li class="page-item disabled"><a class="page-link" href="#">Strona {{ lekarze_na_stronie.number }} z {{ lekarze_na_stronie.paginator.num_pages }}</a></li>
+
+
+            {% if lekarze_na_stronie.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ lekarze_na_stronie.next_page_number }}{% if filter_by and phrase %}&filterBy={{ filter_by }}&phrase={{ phrase }}{% endif %}">Następna</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ lekarze_na_stronie.paginator.num_pages }}{% if filter_by and phrase %}&filterBy={{ filter_by }}&phrase={{ phrase }}{% endif %}">Ostatnia &raquo</a></li>l
+            {% endif %}
+
+          </ul>
+        </nav>
+
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="{% url 'export_lekarze' %}"  class="btn justyna-button-color-second">Eksportuj do CSV</a>
         </div>
